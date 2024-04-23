@@ -637,15 +637,17 @@ const AddOfferModal = () => {
             const isErrorsEmpty = Object.values(errors).every(error => !error);
             if (!isErrorsEmpty) {
                 showToast({
-                    type: 'pageError',
-                    message: 'Can\'t save offer, please double check that you\'ve filled all mandatory fields correctly'
+                    title: 'Can\'t save offer',
+                    type: 'error',
+                    message: 'Make sure you filled all required fields'
                 });
                 return;
             }
             if (!(await handleSave())) {
                 showToast({
-                    type: 'pageError',
-                    message: 'Can\'t save offer, please double check that you\'ve filled all mandatory fields.'
+                    title: 'Can\'t save offer',
+                    type: 'error',
+                    message: 'Make sure you filled all required fields'
                 });
             }
         }}

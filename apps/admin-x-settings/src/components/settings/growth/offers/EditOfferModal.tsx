@@ -66,7 +66,7 @@ const Sidebar: React.FC<{
                                 modal?.remove();
                                 showToast({
                                     type: 'success',
-                                    message: 'Offer archived successfully'
+                                    title: 'Offer archived successfully'
                                 });
                                 updateRoute('offers/edit');
                             } catch (e) {
@@ -87,7 +87,7 @@ const Sidebar: React.FC<{
                                 modal?.remove();
                                 showToast({
                                     type: 'success',
-                                    message: 'Offer reactivated successfully'
+                                    title: 'Offer reactivated successfully'
                                 });
                                 updateRoute('offers/edit');
                             } catch (e) {
@@ -282,8 +282,9 @@ const EditOfferModal: React.FC<{id: string}> = ({id}) => {
         onOk={async () => {
             if (!(await handleSave({fakeWhenUnchanged: true}))) {
                 showToast({
-                    type: 'pageError',
-                    message: 'Can\'t save offer, please double check that you\'ve filled all mandatory fields.'
+                    title: 'Can\'t save offer',
+                    type: 'error',
+                    message: 'Make sure you filled all required fields'
                 });
             }
         }} /> : null;

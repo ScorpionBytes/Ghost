@@ -3,12 +3,11 @@ import NiceModal, {useModal} from '@ebay/nice-modal-react';
 import React, {useEffect, useState} from 'react';
 import WebhooksTable from './WebhooksTable';
 import {APIKey, useRefreshAPIKey} from '@tryghost/admin-x-framework/api/apiKeys';
-import {ConfirmationModal, Form, ImageUpload, Modal, TextField, showToast} from '@tryghost/admin-x-design-system';
+import {ConfirmationModal, Form, ImageUpload, Modal, TextField} from '@tryghost/admin-x-design-system';
 import {Integration, useBrowseIntegrations, useEditIntegration} from '@tryghost/admin-x-framework/api/integrations';
 import {RoutingModalProps, useRouting} from '@tryghost/admin-x-framework/routing';
 import {getGhostPaths} from '@tryghost/admin-x-framework/helpers';
 import {getImageUrl, useUploadImage} from '@tryghost/admin-x-framework/api/images';
-import {toast} from 'react-hot-toast';
 import {useForm, useHandleError} from '@tryghost/admin-x-framework/hooks';
 
 const CustomIntegrationModalContent: React.FC<{integration: Integration}> = ({integration}) => {
@@ -90,14 +89,7 @@ const CustomIntegrationModalContent: React.FC<{integration: Integration}> = ({in
         title={formState.name || 'Custom integration'}
         stickyFooter
         onOk={async () => {
-            toast.remove();
-            if (!(await handleSave({fakeWhenUnchanged: true}))) {
-                showToast({
-                    type: 'error',
-                    title: 'Can\'t save integration',
-                    message: 'Make sure to fill in all required fields'
-                });
-            }
+            await handleSave({fakeWhenUnchanged: true});
         }}
     >
         <div className='mt-7 flex w-full flex-col gap-7 md:flex-row'>
